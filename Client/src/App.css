@@ -1,0 +1,41 @@
+h1 {
+  color: blue;
+}
+
+label {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.jumbotron {
+  min-height: 5vh;
+  background-color: lightblue;
+  padding: 20px;
+  border-radius: 20px;
+}
+.containerProducts{
+  min-height: 50vh;
+  background-color: lightblue;
+  border-radius: 20px;
+  padding: 20px
+}
+.author{
+  color: blue
+}
+
+.day{
+  color: brown;
+}
+.text{
+  color: green;
+}
+.warning{
+  color: white;
+  background-color: #dc3545;
+  max-width: 200px;
+  padding: 15px;
+  border-radius: 15px;
+}
+.table td, .table th {
+  vertical-align : middle;
+}
