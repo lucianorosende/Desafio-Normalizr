@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ProductContainer from "./productsContainer";
 
 let getData = async () => {
@@ -16,19 +17,31 @@ const ProductForm = () => {
     };
 
     return (
-        <div className="containerProducts">
-            <input
-                type="submit"
-                value="Generar Productos"
-                className="btn btn-success mt-3 mb-3"
-                onClick={() => saveData()}
-            ></input>
-            <b className="m-3">
-                Realmente los productos en si no tienen mucho sentido
-            </b>
+        <>
+            <div className="container mt-3">
+                <h1 className="alert alert-success">
+                    Bienvenido test
+                    <Link to="/">
+                        <button className="btn btn-warning m-3 justify-content-end">
+                            Desloguear
+                        </button>
+                    </Link>
+                </h1>
+            </div>
+            <div className="containerProducts">
+                <input
+                    type="submit"
+                    value="Generar Productos"
+                    className="btn btn-success mt-3 mb-3"
+                    onClick={() => saveData()}
+                ></input>
+                <b className="m-3">
+                    Realmente los productos en si no tienen mucho sentido
+                </b>
 
-            <ProductContainer prod={products} />
-        </div>
+                <ProductContainer prod={products} />
+            </div>
+        </>
     );
 };
 

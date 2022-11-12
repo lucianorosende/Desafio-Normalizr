@@ -7,7 +7,7 @@ label {
   font-style: italic;
 }
 
-.jumbotron {
+.jumbotron { 
   min-height: 5vh;
   background-color: lightblue;
   padding: 20px;
