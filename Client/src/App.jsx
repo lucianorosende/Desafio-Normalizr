@@ -1,5 +1,6 @@
 import Home from "./components/home";
 import Login from "./components/login";
+import Logout from "./components/logout";
 import io from "socket.io-client";
 import "./bootstrap.css";
 import "./app.css";
@@ -11,7 +12,8 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/products" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/logout" element={<Logout />} />
         </Routes>
     );
 }

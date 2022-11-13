@@ -1,12 +1,34 @@
 import { Link } from "react-router-dom";
 
 function Login() {
+    const loginUser = async (e) => {
+        e.preventDefault();
+        let name = {
+            nombre: e.target[0].value,
+        };
+
+        try {
+            const res = await fetch("http://localhost:3001/cookie/login", {
+                method: "post",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(name),
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     return (
         <div className="container mt-3">
             <div className="jumbotron">
                 <h1>Login de Usuario</h1>
                 <br />
-                <form action="" method="" autoComplete="off">
+                <form
+                    action=""
+                    method=""
+                    autoComplete="off"
+                    onSubmit={loginUser}
+                >
                     <div className="form-group">
                         <label htmlFor="nombre">Ingrese su nombre</label>
                         <input
@@ -17,8 +39,12 @@ function Login() {
                             required
                         />
                     </div>
-                    <Link to="/products" className="btn btn-success mt-3">
-                        Enviar
+                    <Link to="/home">
+                        <input
+                            className="btn btn-success mt-3"
+                            type="submit"
+                            value="Enviar"
+                        />
                     </Link>
                 </form>
             </div>

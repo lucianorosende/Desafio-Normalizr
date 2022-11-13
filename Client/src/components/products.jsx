@@ -8,6 +8,12 @@ let getData = async () => {
     return result;
 };
 
+let getUserName = async () => {
+    const res = await fetch("http://localhost:3001/cookie/session");
+    const data = await res.json();
+    console.log(data);
+};
+
 const ProductForm = () => {
     const [products, setProducts] = useState([]);
 
@@ -15,13 +21,16 @@ const ProductForm = () => {
         let data = await getData();
         setProducts(data);
     };
+    useEffect(() => {
+        getUserName();
+    }, []);
 
     return (
         <>
             <div className="container mt-3">
                 <h1 className="alert alert-success">
                     Bienvenido test
-                    <Link to="/">
+                    <Link to="/logout">
                         <button className="btn btn-warning m-3 justify-content-end">
                             Desloguear
                         </button>

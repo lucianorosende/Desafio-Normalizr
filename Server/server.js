@@ -28,6 +28,10 @@ app.use(
         secret: "secret",
         resave: false,
         saveUninitialized: false,
+        rolling: true,
+        cookie: {
+            maxAge: 60000,
+        },
     })
 );
 
@@ -54,3 +58,10 @@ export const io = new Server(server, {
     },
 });
 Connect();
+
+import mongoose from "mongoose";
+import * as dotenv from "dotenv";
+dotenv.config();
+
+export const url = process.env.MONGO_URL;
+export const connect = mongoose.connect(url);
