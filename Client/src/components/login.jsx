@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
+    const navigate = useNavigate();
+
     const loginUser = async (e) => {
         e.preventDefault();
         let name = {
@@ -11,12 +15,14 @@ function Login() {
             const res = await fetch("http://localhost:3001/cookie/login", {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
-                withCredentials: true,
+                credentials: "include",
                 body: JSON.stringify(name),
             });
         } catch (e) {
             console.log(e);
         }
+
+        navigate("/home");
     };
 
     return (
@@ -40,13 +46,12 @@ function Login() {
                             required
                         />
                     </div>
-                    {/* <Link to="/home"> */}
+
                     <input
                         className="btn btn-success mt-3"
                         type="submit"
                         value="Enviar"
                     />
-                    {/* </Link> */}
                 </form>
             </div>
         </div>

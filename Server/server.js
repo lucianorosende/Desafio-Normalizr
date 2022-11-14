@@ -4,7 +4,7 @@ import { Server } from "socket.io";
 import cors from "cors";
 import apiRouter from "./router/products.router.js";
 import CartRouter from "./router/cart.router.js";
-import cookieRouter from "./router/cookie.router.js";
+import authRouter from "./router/auth.router.js";
 import Connect from "./api/websocket.js";
 import cookieParser from "cookie-parser";
 import session from "express-session";
@@ -49,7 +49,7 @@ app.use(
         saveUninitialized: false,
         rolling: true,
         cookie: {
-            maxAge: 60000,
+            maxAge: 20000,
             secure: false,
         },
     })
@@ -61,7 +61,7 @@ app.use(Express.json());
 app.use(cookieParser("qweqweqweqTEST"));
 app.use("/api/productos", apiRouter);
 app.use("/api/carrito", CartRouter);
-app.use("/cookie", cookieRouter);
+app.use("/cookie", authRouter);
 
 // Levanta el server -----------------------------------------------------------------
 const srv = server.listen(port, () => {
