@@ -2,29 +2,31 @@ import React, { useEffect, useState } from "react";
 import { socket } from "../App";
 import MessageContainer from "./messageContainer";
 
-const addMessage = (e) => {
-    let hour = new Date();
-    e.preventDefault();
-    const msg = {
-        author: {
-            id: e.target[0].value,
-            nombre: "test",
-            apellido: "test",
-            edad: "test",
-            alias: "test",
-            avatar: "test",
-        },
-        text: e.target[1].value,
-        day: hour.toLocaleDateString(),
-        hour: hour.toLocaleTimeString(),
-    };
-
-    socket.emit("newMsg", msg);
-    return false;
-};
-
 const Messages = () => {
     const [msg, setMessage] = useState([]);
+    const [id, setID] = useState("");
+    const [text, setText] = useState("");
+
+    const addMessage = (e) => {
+        let hour = new Date();
+        e.preventDefault();
+        const msg = {
+            author: {
+                id: id,
+                nombre: "test",
+                apellido: "test",
+                edad: "test",
+                alias: "test",
+                avatar: "test",
+            },
+            text: text,
+            day: hour.toLocaleDateString(),
+            hour: hour.toLocaleTimeString(),
+        };
+
+        socket.emit("newMsg", msg);
+        return false;
+    };
 
     useEffect(() => {
         socket.on("messages", (data) => {
@@ -50,6 +52,7 @@ const Messages = () => {
                             name="email"
                             required
                             placeholder="lucianorosende@gmail.com"
+                            onChange={(e) => setID(e.target.value)}
                         />
                     </div>
                     <hr />
@@ -66,6 +69,7 @@ const Messages = () => {
                             name="msg"
                             placeholder="Contanos lo que quieras!"
                             required
+                            onChange={(e) => setText(e.target.value)}
                         />
                     </div>
 
