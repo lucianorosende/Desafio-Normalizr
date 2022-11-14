@@ -9,7 +9,9 @@ let getData = async () => {
 };
 
 let getUserName = async () => {
-    const res = await fetch("http://localhost:3001/cookie/session");
+    const res = await fetch("http://localhost:3001/cookie/session", {
+        withCredentials: true,
+    });
     const data = await res.json();
     console.log(data);
 };

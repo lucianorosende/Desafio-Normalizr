@@ -38,7 +38,7 @@ cookieRouter.get("/logout", (req, res) => {
 cookieRouter.post("/login", (req, res) => {
     req.session.nombre = req.body.nombre;
     console.log(req.session);
-    res.send("done");
+    res.send(req.session);
 });
 
 export default cookieRouter;

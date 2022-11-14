@@ -8,29 +8,49 @@ import cookieRouter from "./router/cookie.router.js";
 import Connect from "./api/websocket.js";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import FileStore from "session-file-store";
-import MongoStore from "connect-mongo";
+import MongoStore from "connect-mongodb-session";
 
 // Creando Servidor -------------------------------------------------------------------------
 const app = Express();
-app.use(cors());
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+        credentials: true,
+    })
+);
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
+    res.header(
+        "Access-Control-Allow-Methods",
+        "GET,PUT,POST,DELETE,UPDATE,OPTIONS"
+    );
+    res.header(
+        "Access-Control-Allow-Headers",
+        "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
+    );
+    next();
+});
 const server = http.createServer(app);
 const port = 3001;
-const FileStoreInit = FileStore(session);
-const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+
+const MongoDBstore = MongoStore(session);
+
+const sessionStore = new MongoDBstore({
+    uri: "mongodb+srv://coderhouse:coderhouse@react-ecommerce.aija2lu.mongodb.net/React-ecommerce?retryWrites=true&w=majority",
+    collection: "sessions",
+});
 app.use(
     session({
-        store: MongoStore.create({
-            mongoUrl:
-                "mongodb+srv://coderhouse:coderhouse@react-ecommerce.aija2lu.mongodb.net/React-ecommerce?retryWrites=true&w=majority",
-            mongoOptions: advancedOptions,
-        }),
+        store: sessionStore,
         secret: "secret",
-        resave: false,
+        resave: true,
         saveUninitialized: false,
         rolling: true,
         cookie: {
             maxAge: 60000,
+            secure: false,
         },
     })
 );

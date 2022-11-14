@@ -11,6 +11,7 @@ function Login() {
             const res = await fetch("http://localhost:3001/cookie/login", {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
+                withCredentials: true,
                 body: JSON.stringify(name),
             });
         } catch (e) {
@@ -39,13 +40,13 @@ function Login() {
                             required
                         />
                     </div>
-                    <Link to="/home">
-                        <input
-                            className="btn btn-success mt-3"
-                            type="submit"
-                            value="Enviar"
-                        />
-                    </Link>
+                    {/* <Link to="/home"> */}
+                    <input
+                        className="btn btn-success mt-3"
+                        type="submit"
+                        value="Enviar"
+                    />
+                    {/* </Link> */}
                 </form>
             </div>
         </div>
